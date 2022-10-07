@@ -1,0 +1,64 @@
+### GET PRODUCTS
+GET http://localhost:3003/product
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4MDA4ZDFmLTUxNTEtNDBmMy05MjllLWU2NjQyMDBlMTMxZSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQ5OTA3NDcsImV4cCI6MTY2NTA3NzE0N30.rhc25bUawoe64lmGW60RLrAk2QOBrntZiahM_ATGUf8"
+
+
+### CREATE USER
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+  "name": "Goku",
+  "email": "goku@gmail.com",
+  "password": "123456",
+  "role": "NORMAL"
+}
+
+### LOGIN
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+  "email": "goku@gmail.com",
+  "password": "123456"
+}
+
+### ADD ORDER
+GET http://localhost:3003/order/add-order
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJkYTE3OWZlLWU5NjQtNDM5Yi04ODgzLTA5MTZkOTE2YmE4OCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjUxNjU2ODEsImV4cCI6MTY2NTI1MjA4MX0.fjRireS74HcupjV7WX67vrREXAVKrXI1Nr3Kmn2ff0c
+Content-Type: application/json
+
+{
+  "productId": "76"
+}
+
+
+### GET ORDER
+GET http://localhost:3003/order
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJkYTE3OWZlLWU5NjQtNDM5Yi04ODgzLTA5MTZkOTE2YmE4OCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjUxNjU2ODEsImV4cCI6MTY2NTI1MjA4MX0.fjRireS74HcupjV7WX67vrREXAVKrXI1Nr3Kmn2ff0c
+
+
+### DELETE ORDER
+# DELETE http://localhost:3003/order/delete-order
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4MDA4ZDFmLTUxNTEtNDBmMy05MjllLWU2NjQyMDBlMTMxZSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQ5OTY4MTQsImV4cCI6MTY2NTA4MzIxNH0.ovx09f_fqVF6GZsapn1jeGRTjjn4A8pY_Z8x1p_4DqE
+
+# Content-Type: application/json
+
+# {
+#   "productId": "16"
+# }
+
+POST http://localhost:3003/delivery/add-delivery
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4MDA4ZDFmLTUxNTEtNDBmMy05MjllLWU2NjQyMDBlMTMxZSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjUxMDgzODgsImV4cCI6MTY2NTE5NDc4OH0.QiDGu4ZptHdWUcNhE8CYo0IvPsxOGwq6F8JOFA6GYOQ
+Content-Type: application/json
+
+{
+   "receiveUserName": "Fernanda",
+   "deliveryDate": "22/12/2022"
+}
+
+
+### 
+
+GET http://localhost:3003/delivery
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4MDA4ZDFmLTUxNTEtNDBmMy05MjllLWU2NjQyMDBlMTMxZSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjUxMDgzODgsImV4cCI6MTY2NTE5NDc4OH0.QiDGu4ZptHdWUcNhE8CYo0IvPsxOGwq6F8JOFA6GYOQ
