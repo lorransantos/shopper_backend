@@ -16,5 +16,5 @@ const orderController = new OrderController(
 
 orderRouter.get('/add-order', orderController.addOrder);
 orderRouter.get('/', orderController.getOrders);
-// orderRouter.delete('/delete-order', orderController.deleteOrders);
+orderRouter.delete('/delete-order', orderController.deleteOrders);
 orderRouter.post('/finish-order', orderController.finishOrder);

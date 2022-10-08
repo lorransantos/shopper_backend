@@ -1,3 +1,4 @@
+import { ProductDataBase } from './../database/ProductDataBase';
 import { DeliveryDataBase } from '../database/DeliveryDataBase';
 import { OrderDataBase } from '../database/OrderDataBase';
 import { IDeliveryInputDB, IDeliveryInputDTO } from '../models/Delivery';
@@ -8,6 +9,7 @@ export class DeliveryBusiness {
   constructor(
     public orderDataBase: OrderDataBase,
     public deliveryDataBase: DeliveryDataBase,
+    public productDataBase: ProductDataBase,
     public idGenerator: IdGenerator,
     public authenticator: Authenticator
   ) {}
@@ -32,42 +34,41 @@ export class DeliveryBusiness {
     }
 
     const userId = this.authenticator.getTokenPayload(token).id;
-    console.log(userId);
+
     const purchaseList = await this.orderDataBase.selectOrders(userId);
 
-    const test = purchaseList.map((item) => item);
+    for (const order of purchaseList) {
+      const product = await this.productDataBase.getProductById(order.product_id)
+      const newStock = product.qty_stock - order.product_qty;
+      await this.deliveryDataBase.updateStock(order.product_id, newStock);
+    }
 
     const id: string = this.idGenerator.generate();
-
     const inputDB: IDeliveryInputDB = {
       id,
       receiveUserName,
       deliveryDate,
       userId,
     };
-
     const orderDelivery = await this.deliveryDataBase.finishOrder(inputDB);
 
     return {
       deliveryInfo: orderDelivery,
-      orders: test,
+      orders: purchaseList,
     };
   };
 
   public getDeliveryOrders = async (input: string) => {
     const token = input;
-
     if (!token || typeof token !== 'string') {
       throw new Error('Token inexistente ou incorreto');
     }
 
     const userId = this.authenticator.getTokenPayload(token).id;
-    console.log(userId);
 
     const deliveryOrders = await this.deliveryDataBase.getDeliveryOrders(
       userId
     );
-
     return deliveryOrders;
   };
 }

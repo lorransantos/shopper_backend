@@ -2,7 +2,8 @@ export class Order {
   constructor(
     private id: string,
     private productId: string,
-    private userId: string
+    private userId: string,
+    private quantity: number
   ) {}
 
   public getId = () => {
@@ -16,11 +17,16 @@ export class Order {
   public getUserId = () => {
     return this.userId;
   };
+
+  public getQuantity = () => {
+    return this.quantity;
+  };
 }
 
 export interface IAddOrderInputDTO {
   token: string;
   productId: string;
+  quantity: number
 }
 
 export interface IAddOrderInputDB {
@@ -35,5 +41,13 @@ export interface IGetOrderInputDTO {
 
 export interface IDeleteOrderInputDTO {
   token: string;
-  productId: string;
+  orderId: string;
+}
+
+export interface IOrdersOutputDB {
+  id: string,
+  product_id: string,
+  name: string,
+  price: number,
+  product_qty: number
 }

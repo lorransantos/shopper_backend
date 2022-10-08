@@ -13,10 +13,12 @@ export class OrderController {
     try {
       const token: string = req.headers.authorization as string;
       const productId: string = req.body.productId as string;
+      const quantity: number = req.body.quantity as number
 
       const input: IAddOrderInputDTO = {
         token,
         productId,
+        quantity
       };
 
       const response = await this.orderBusiness.addOrder(input);
@@ -47,11 +49,11 @@ export class OrderController {
   public deleteOrders = async (req: Request, res: Response) => {
     try {
       const token: string = req.headers.authorization as string;
-      const productId: string = req.body.productId as string;
+      const orderId: string = req.body.orderId as string;
 
       const input: IDeleteOrderInputDTO = {
         token,
-        productId,
+        orderId,
       };
 
       const response = await this.orderBusiness.deleteOrder(input);

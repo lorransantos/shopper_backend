@@ -8,10 +8,7 @@ export class DeliveryController {
   public deliveryOrder = async (req: Request, res: Response) => {
     try {
       const token: string = req.headers.authorization as string;
-      const { receiveUserName, deliveryDate } = req.body as {
-        receiveUserName: string;
-        deliveryDate: string;
-      };
+      const { receiveUserName, deliveryDate } = req.body
 
       const input: IDeliveryInputDTO = {
         token,

@@ -1,4 +1,5 @@
-import { Order } from '../models/Order';
+import { ProductDataBase } from './ProductDataBase';
+import { IOrdersOutputDB, Order } from '../models/Order';
 import { BaseDatabase } from './BaseDataBase';
 
 export class OrderDataBase extends BaseDatabase {
@@ -6,14 +7,18 @@ export class OrderDataBase extends BaseDatabase {
   public static TABLE_ORDER2 = 'orders_list';
   public static TABLE_FINISH_ORDER = 'orders_delivery';
 
-  // public getNameById = async (id: string) => {
-  //   const [result] = await BaseDatabase.connection(OrderDataBase.TABLE_ORDER)
-  //     .select('Users.name')
-  //     .innerJoin('Users', 'Users.id', `${OrderDataBase.TABLE_ORDER}.user_id`)
-  //     .groupBy('Users.id')
-  //     .where({ user_id: id });
-  //   return result.name;
-  // };
+  public getQtyStock = async (productId: string) => {
+    const [response] = await BaseDatabase.connection(ProductDataBase.TABLE_PRODUCTS)
+    .select('qty_stock')
+    .where({id: productId});
+    return response
+  }
+
+  public getOrderByProductId = async (productId: string, userId: string) => {
+    const [result] = await BaseDatabase.connection(OrderDataBase.TABLE_ORDER2)
+      .where({ user_id: userId }).where({product_id: productId})
+    return result;
+  };
 
   public addOrder = async (order: Order) => {
     await BaseDatabase.connection(OrderDataBase.TABLE_ORDER2).insert({
@@ -23,11 +28,18 @@ export class OrderDataBase extends BaseDatabase {
     });
   };
 
-  public selectOrders = async (id: string) => {
-    const result = await BaseDatabase.connection(OrderDataBase.TABLE_ORDER2)
+  public alterOrderQty = async (incremento: number, productId: string, userId: string,) => {
+    await BaseDatabase.connection(OrderDataBase.TABLE_ORDER2)
+    .update({ product_qty: incremento })
+    .where({product_id: productId})
+    .where({user_id: userId});
+  };
+
+  public selectOrders = async (id: string): Promise<IOrdersOutputDB[]> => {
+    const result: IOrdersOutputDB[] = await BaseDatabase.connection(OrderDataBase.TABLE_ORDER2)
       .select(
         'orders_list.id',
-        // 'products.id',
+        `${OrderDataBase.TABLE_ORDER2}.product_id`,
         'products.name',
         'products.price',
         'orders_list.product_qty'
@@ -35,19 +47,19 @@ export class OrderDataBase extends BaseDatabase {
       // .innerJoin('Users', 'Users.id', `${OrderDataBase.TABLE_ORDER}.user_id`)
       .innerJoin(
         'products',
-        'products.id',
+        `${ProductDataBase.TABLE_PRODUCTS}.id`,
         `${OrderDataBase.TABLE_ORDER2}.product_id`
       )
       // .count('products.id')
-      // .groupBy('products.id')
-      .where({ user_id: id });
+      // .groupBy('product_id')
+      .where({ user_id: id })
     return result;
   };
 
-  public deleteOrder = async (productId: string) => {
-    await BaseDatabase.connection(OrderDataBase.TABLE_ORDER)
+  public deleteOrder = async (orderId: string) => {
+    await BaseDatabase.connection(OrderDataBase.TABLE_ORDER2)
       .delete()
-      .where({ product_id: productId });
+      .where({ id: orderId });
   };
 
   public finishOrder = async (

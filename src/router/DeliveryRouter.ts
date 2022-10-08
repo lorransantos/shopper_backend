@@ -1,3 +1,4 @@
+import { ProductDataBase } from './../database/ProductDataBase';
 import { Router } from 'express';
 import { DeliveryBusiness } from '../business/DeliveryBusiness';
 import { DeliveryController } from '../controller/DeliveryController';
@@ -12,6 +13,7 @@ const deliveryController = new DeliveryController(
   new DeliveryBusiness(
     new OrderDataBase(),
     new DeliveryDataBase(),
+    new ProductDataBase(),
     new IdGenerator(),
     new Authenticator()
   )

@@ -1,6 +1,5 @@
 import { OrderDataBase } from '../database/OrderDataBase';
 import {
-  IAddOrderInputDB,
   IAddOrderInputDTO,
   IDeleteOrderInputDTO,
   IGetOrderInputDTO,
@@ -19,20 +18,47 @@ export class OrderBusiness {
   public addOrder = async (input: IAddOrderInputDTO) => {
     const token = input.token;
     const productId = input.productId;
+    let quantity = input.quantity;
 
     if (!token) {
       throw new Error('Autorização negada');
     }
+    if (!quantity) {
+      quantity = + 1
+    }
 
     const userId: string = this.authenticator.getTokenPayload(token).id;
-    const id: string = this.idGenerator.generate();
 
-    const order = new Order(id, productId, userId);
+    // const checkStock = await this.productBusiness.getProducts(userId)
+    const checkStock = await this.orderDataBase.getQtyStock(productId);
 
-    await this.orderDataBase.addOrder(order);
+    if (checkStock.qty_stock < quantity) {
+      throw new Error('Quantidade desejada acima da existente em estoque')
+    }
+    
+    const checkOrder = await this.orderDataBase.getOrderByProductId(productId, userId);
+    
+    if (checkOrder) {
+      let tete = checkOrder.product_qty
+      const incremento = tete + quantity 
 
-    const response = 'Adicionado ao carrinho';
-    return response;
+      const validation = checkOrder.product_qty + incremento
+      
+      if (validation > checkStock.qty_stock) {
+        throw new Error('Quantidade desejada acima da existente em estoque')
+      }
+
+      await this.orderDataBase.alterOrderQty(incremento, productId, userId)
+
+      return 'Alterado com sucesso!'
+    } else {
+      const id: string = this.idGenerator.generate();
+      const order = new Order(id, productId, userId, quantity);
+      await this.orderDataBase.addOrder(order);
+  
+      const response = 'Adicionado ao carrinho';
+      return response;
+    }    
   };
 
   public getOrders = async (input: IGetOrderInputDTO) => {
@@ -42,30 +68,21 @@ export class OrderBusiness {
     }
 
     const userId: string = this.authenticator.getTokenPayload(token).id;
-
-    // const userName = await this.orderDataBase.getNameById(userId);
     const response = await this.orderDataBase.selectOrders(userId);
-    // const test = response.map((item) => {
-    //   return {
-    //     teste: item.name,
-    //     teste2: item.price,
-    //   };
-    // });
+
     return response;
   };
 
   public deleteOrder = async (input: IDeleteOrderInputDTO) => {
     const token = input.token;
-    const productId = input.productId;
+    const orderId = input.orderId;
     if (!token) {
       throw new Error('Autorização negada');
     }
 
-    console.log('teste');
-
     const userId: string = this.authenticator.getTokenPayload(token).id;
 
-    await this.orderDataBase.deleteOrder(productId);
+    await this.orderDataBase.deleteOrder(orderId);
     return 'Item deletado com sucesso!';
   };
 
@@ -74,7 +91,6 @@ export class OrderBusiness {
     deliveryDate: string,
     token: string
   ) => {
-    //  purchaseList
     const userId = this.authenticator.getTokenPayload(token).id;
     const purchaseList = await this.orderDataBase.selectOrders(userId);
 

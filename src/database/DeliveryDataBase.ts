@@ -1,3 +1,4 @@
+import { ProductDataBase } from './ProductDataBase';
 import { IDeliveryInputDB } from '../models/Delivery';
 import { BaseDatabase } from './BaseDataBase';
 
@@ -31,4 +32,12 @@ export class DeliveryDataBase extends BaseDatabase {
     ).where({ user_id: userId });
     return response;
   };
+
+  public getProductById = async (productId: string) => {}
+
+  public updateStock = async (productId: string, qtyPurchase: number) => {
+    await BaseDatabase.connection(ProductDataBase.TABLE_PRODUCTS)
+    .update({qty_stock: qtyPurchase})
+    .where({id: productId})
+  }
 }
