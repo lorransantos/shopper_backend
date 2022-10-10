@@ -14,7 +14,7 @@ const orderController = new OrderController(
   new OrderBusiness(new OrderDataBase(), new IdGenerator(), new Authenticator())
 );
 
-orderRouter.get('/add-order', orderController.addOrder);
+orderRouter.post('/add-order', orderController.addOrder);
 orderRouter.get('/', orderController.getOrders);
-orderRouter.delete('/delete-order', orderController.deleteOrders);
+orderRouter.put('/delete-order', orderController.deleteOrders);
 orderRouter.post('/finish-order', orderController.finishOrder);

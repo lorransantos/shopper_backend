@@ -8,10 +8,10 @@ POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
-  "name": "Goku",
-  "email": "goku@gmail.com",
+  "name": "Vegeta",
+  "email": "vegeta@gmail.com",
   "password": "123456",
-  "role": "NORMAL"
+  "role": "ADMIN"
 }
 
 ### LOGIN
@@ -19,39 +19,39 @@ POST http://localhost:3003/user/login
 Content-Type: application/json
 
 {
-  "email": "goku@gmail.com",
+  "email": "vegeta@gmail.com",
   "password": "123456"
 }
 
 ### ADD ORDER
-GET http://localhost:3003/order/add-order
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJkYTE3OWZlLWU5NjQtNDM5Yi04ODgzLTA5MTZkOTE2YmE4OCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjUyNDU1NzUsImV4cCI6MTY2NTMzMTk3NX0.8VvQHw9sYiQ_jccxuHYOFpDDCebK0V_0bFNHGvKzeWs
+POST http://localhost:3003/order/add-order
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiZGYxN2M4LWI3NTctNDM5MC05ODk4LWFlOTY0YmI0YTUwNCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NTM0NTI2MCwiZXhwIjoxNjY1NDMxNjYwfQ.1jGxP2QFCCy0jBhuXDApp5vzjSHWL45asHIAvRLqutA
 Content-Type: application/json
 
 {
-  "productId": "34",
+  "productId": "16",
   "quantity": 1
 }
 
 
 ### GET ORDER
 GET http://localhost:3003/order
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJkYTE3OWZlLWU5NjQtNDM5Yi04ODgzLTA5MTZkOTE2YmE4OCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjUyNDU1NzUsImV4cCI6MTY2NTMzMTk3NX0.8VvQHw9sYiQ_jccxuHYOFpDDCebK0V_0bFNHGvKzeWs
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiZGYxN2M4LWI3NTctNDM5MC05ODk4LWFlOTY0YmI0YTUwNCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NTM0NTI2MCwiZXhwIjoxNjY1NDMxNjYwfQ.1jGxP2QFCCy0jBhuXDApp5vzjSHWL45asHIAvRLqutA
 
 
 ### DELETE ORDER
-DELETE http://localhost:3003/order/delete-order
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJkYTE3OWZlLWU5NjQtNDM5Yi04ODgzLTA5MTZkOTE2YmE4OCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjUyNDU1NzUsImV4cCI6MTY2NTMzMTk3NX0.8VvQHw9sYiQ_jccxuHYOFpDDCebK0V_0bFNHGvKzeWs
+PUT http://localhost:3003/order/delete-order
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiZGYxN2M4LWI3NTctNDM5MC05ODk4LWFlOTY0YmI0YTUwNCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NTM0NTI2MCwiZXhwIjoxNjY1NDMxNjYwfQ.1jGxP2QFCCy0jBhuXDApp5vzjSHWL45asHIAvRLqutA
 Content-Type: application/json
 
 {
-  "orderId": "14b42633-7056-498d-87ac-6c67357155e3"
+  "orderId": "964906df-30d9-4835-9b95-e34645d33c93"
 }
 
 
 ### ADD DELIVERY DATE
 POST http://localhost:3003/delivery/add-delivery
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJkYTE3OWZlLWU5NjQtNDM5Yi04ODgzLTA5MTZkOTE2YmE4OCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjUyMzc3NTMsImV4cCI6MTY2NTMyNDE1M30.G426MhqvPUUOAfjUmbfxlmdErO81w2mEaRAfJ4peXbo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiZGYxN2M4LWI3NTctNDM5MC05ODk4LWFlOTY0YmI0YTUwNCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NTM0NTI2MCwiZXhwIjoxNjY1NDMxNjYwfQ.1jGxP2QFCCy0jBhuXDApp5vzjSHWL45asHIAvRLqutA
 Content-Type: application/json
 
 {
@@ -63,4 +63,4 @@ Content-Type: application/json
 ### GET DELIVERY DATE
 
 GET http://localhost:3003/delivery
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJkYTE3OWZlLWU5NjQtNDM5Yi04ODgzLTA5MTZkOTE2YmE4OCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjUyMzc3NTMsImV4cCI6MTY2NTMyNDE1M30.G426MhqvPUUOAfjUmbfxlmdErO81w2mEaRAfJ4peXbo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiZGYxN2M4LWI3NTctNDM5MC05ODk4LWFlOTY0YmI0YTUwNCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NTM0NTI2MCwiZXhwIjoxNjY1NDMxNjYwfQ.1jGxP2QFCCy0jBhuXDApp5vzjSHWL45asHIAvRLqutA
