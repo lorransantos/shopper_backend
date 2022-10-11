@@ -94,7 +94,7 @@ export class OrderBusiness {
     const userId = this.authenticator.getTokenPayload(token).id;
     const purchaseList = await this.orderDataBase.selectOrders(userId);
 
-    const test = purchaseList.map((item) => item);
+    const purchases = purchaseList.map((item) => item);
 
     const id: string = this.idGenerator.generate();
 
@@ -106,7 +106,7 @@ export class OrderBusiness {
 
     return {
       deliveryInfo: orderDelivery,
-      orders: test,
+      orders: purchases,
     };
   };
 }
