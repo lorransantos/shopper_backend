@@ -8,7 +8,7 @@ export class DeliveryController {
   public deliveryOrder = async (req: Request, res: Response) => {
     try {
       const token: string = req.headers.authorization as string;
-      const { receiveUserName, deliveryDate } = req.body
+      const { receiveUserName, deliveryDate } = req.body;
 
       const input: IDeliveryInputDTO = {
         token,
@@ -16,11 +16,13 @@ export class DeliveryController {
         deliveryDate,
       };
 
-      const result = await this.deliveryBusiness.deliveryOrder(input);
+      const response = await this.deliveryBusiness.deliveryOrder(input);
 
-      res.status(201).send(result);
-    } catch (error: any) {
-      res.status(400).send(error.sqlMessage || { message: error.message });
+      res.status(201).send(response);
+    } catch (error) {
+      res
+        .status(error.code)
+        .send(error.sqlMessage || { message: error.message });
     }
   };
 
@@ -28,11 +30,13 @@ export class DeliveryController {
     try {
       const token: string = req.headers.authorization as string;
 
-      const result = await this.deliveryBusiness.getDeliveryOrders(token);
+      const response = await this.deliveryBusiness.getDeliveryOrders(token);
 
-      res.status(201).send(result);
-    } catch (error: any) {
-      res.status(400).send(error.sqlMessage || { message: error.message });
+      res.status(201).send(response);
+    } catch (error) {
+      res
+        .status(error.code)
+        .send(error.sqlMessage || { message: error.message });
     }
   };
 }

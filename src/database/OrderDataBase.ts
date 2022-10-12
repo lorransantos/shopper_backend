@@ -1,26 +1,59 @@
 import { ProductDataBase } from './ProductDataBase';
-import { IOrdersOutputDB, Order } from '../models/Order';
+import {
+  IAlterOrderQtyIntputDTO,
+  IDeleteInputDTO,
+  IGetOrderByIdOutputDB,
+  IGetOrderByProductIdInputDTO,
+  IGetOrderByProductIdOutputDB,
+  IGetQtyStockInputDTO,
+  IGetQtyStockOutputDB,
+  IOrdersOutputDB,
+  ISelectOrdersInputDTO,
+  Order,
+} from '../models/Order';
 import { BaseDatabase } from './BaseDataBase';
 
 export class OrderDataBase extends BaseDatabase {
-  // public static TABLE_ORDER = 'shopping_order';
   public static TABLE_ORDER = 'orders_list';
   public static TABLE_FINISH_ORDER = 'orders_delivery';
 
-  public getQtyStock = async (productId: string) => {
-    const [response] = await BaseDatabase.connection(ProductDataBase.TABLE_PRODUCTS)
-    .select('qty_stock')
-    .where({id: productId});
-    return response
-  }
+  public getQtyStock = async (
+    input: IGetQtyStockInputDTO
+  ): Promise<IGetQtyStockOutputDB> => {
+    const productId = input.productId;
 
-  public getOrderByProductId = async (productId: string, userId: string) => {
+    const [response] = await BaseDatabase.connection(
+      ProductDataBase.TABLE_PRODUCTS
+    )
+      .select('qty_stock')
+      .where({ id: productId });
+    return response;
+  };
+
+  public getOrderByProductId = async (
+    input: IGetOrderByProductIdInputDTO
+  ): Promise<IGetOrderByProductIdOutputDB> => {
+    const userId = input.userId;
+    const productId = input.productId;
+
     const [result] = await BaseDatabase.connection(OrderDataBase.TABLE_ORDER)
-      .where({ user_id: userId }).where({product_id: productId})
+      .where({ user_id: userId })
+      .where({ product_id: productId });
     return result;
   };
 
-  public addOrder = async (order: Order) => {
+  public getOrderById = async (
+    input: IDeleteInputDTO
+  ): Promise<IGetOrderByIdOutputDB> => {
+    const orderId = input.orderId;
+
+    const [response] = await BaseDatabase.connection(
+      OrderDataBase.TABLE_ORDER
+    ).where({ id: orderId });
+    return response;
+  };
+
+  public addOrder = async (order: Order): Promise<void> => {
     await BaseDatabase.connection(OrderDataBase.TABLE_ORDER).insert({
       id: order.getId(),
       product_id: order.getProductId(),
@@ -28,52 +61,65 @@ export class OrderDataBase extends BaseDatabase {
     });
   };
 
-  public alterOrderQty = async (incremento: number, productId: string, userId: string,) => {
+  public alterOrderQty = async (
+    input: IAlterOrderQtyIntputDTO
+  ): Promise<void> => {
+    const incremento = input.incremento;
+    const productId = input.productId;
+    const userId = input.userId;
+
     await BaseDatabase.connection(OrderDataBase.TABLE_ORDER)
-    .update({ product_qty: incremento })
-    .where({product_id: productId})
-    .where({user_id: userId});
+      .update({ product_qty: incremento })
+      .where({ product_id: productId })
+      .where({ user_id: userId });
   };
 
-  public selectOrders = async (id: string): Promise<IOrdersOutputDB[]> => {
-    const result: IOrdersOutputDB[] = await BaseDatabase.connection(OrderDataBase.TABLE_ORDER)
+  public selectOrders = async (
+    input: ISelectOrdersInputDTO
+  ): Promise<IOrdersOutputDB[]> => {
+    const id = input.userId;
+    const result: IOrdersOutputDB[] = await BaseDatabase.connection(
+      OrderDataBase.TABLE_ORDER
+    )
       .select(
-        'orders_list.id',
+        `${OrderDataBase.TABLE_ORDER}.id`,
         `${OrderDataBase.TABLE_ORDER}.product_id`,
-        'products.name',
-        'products.price',
-        'orders_list.product_qty'
+        `${ProductDataBase.TABLE_PRODUCTS}.name`,
+        `${ProductDataBase.TABLE_PRODUCTS}.price`,
+        `${OrderDataBase.TABLE_ORDER}.product_qty`
       )
       .innerJoin(
-        'products',
+        `${ProductDataBase.TABLE_PRODUCTS}`,
         `${ProductDataBase.TABLE_PRODUCTS}.id`,
         `${OrderDataBase.TABLE_ORDER}.product_id`
       )
-      .where({ user_id: id })
+      .where({ user_id: id });
     return result;
   };
 
-  public deleteOrder = async (orderId: string) => {
+  public deleteOrder = async (input: IDeleteInputDTO): Promise<void> => {
+    const orderId = input.orderId;
+
     await BaseDatabase.connection(OrderDataBase.TABLE_ORDER)
       .delete()
       .where({ id: orderId });
   };
 
-  public finishOrder = async (
-    id: string,
-    reciveUserName: string,
-    deliveryDate: string
-  ) => {
-    await BaseDatabase.connection(OrderDataBase.TABLE_FINISH_ORDER).insert({
-      id,
-      reciveUserName: reciveUserName,
-      deliveryDate: deliveryDate,
-    });
+  // public finishOrder = async (
+  //   id: string,
+  //   reciveUserName: string,
+  //   deliveryDate: string
+  // ) => {
+  //   await BaseDatabase.connection(OrderDataBase.TABLE_FINISH_ORDER).insert({
+  //     id,
+  //     reciveUserName: reciveUserName,
+  //     deliveryDate: deliveryDate,
+  //   });
 
-    const response = await BaseDatabase.connection(
-      OrderDataBase.TABLE_FINISH_ORDER
-    );
+  //   const response = await BaseDatabase.connection(
+  //     OrderDataBase.TABLE_FINISH_ORDER
+  //   );
 
-    return response;
-  };
+  //   return response;
+  // };
 }

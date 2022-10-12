@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
   "name": "Gohan",
-  "email": "gohan@gmail.com",
+  "email": "gohangmail.com",
   "password": "123456"
 }
 
@@ -35,16 +35,16 @@ Content-Type: application/json
 
 ### GET ORDER
 GET http://localhost:3003/order
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MjM1NWI5LTBmYmQtNGRlNi04Zjc0LTYzNDFhZThiZWIwMCIsImlhdCI6MTY2NTUyODAwNSwiZXhwIjoxNjY1NjE0NDA1fQ.fWXhHQDN-KiZDborUfv19MdiRxVk-bfUPrMUKbvSrTA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MjM1NWI5LTBmYmQtNGRlNi04Zjc0LTYzNDFhZThiZWIwMCIsImlhdCI6MTY2NTU5MjM5MCwiZXhwIjoxNjY1Njc4NzkwfQ.5NNmjXvksm8VLV_1QIGnattQVRwMiIaNvvxUmmlYuCs
 
 
 ### DELETE ORDER
 PUT http://localhost:3003/order/delete-order
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MjM1NWI5LTBmYmQtNGRlNi04Zjc0LTYzNDFhZThiZWIwMCIsImlhdCI6MTY2NTUyODAwNSwiZXhwIjoxNjY1NjE0NDA1fQ.fWXhHQDN-KiZDborUfv19MdiRxVk-bfUPrMUKbvSrTA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MjM1NWI5LTBmYmQtNGRlNi04Zjc0LTYzNDFhZThiZWIwMCIsImlhdCI6MTY2NTU5MjM5MCwiZXhwIjoxNjY1Njc4NzkwfQ.5NNmjXvksm8VLV_1QIGnattQVRwMiIaNvvxUmmlYuCs
 Content-Type: application/json
 
 {
-  "orderId": "b48205db-24aa-4d38-950c-7973263f4c8e"
+  "orderId": "45ec76d3-2aa8-41a9-9127-e4e2da652ecf"
 }
 
 

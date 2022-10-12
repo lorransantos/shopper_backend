@@ -26,7 +26,7 @@ export class Order {
 export interface IAddOrderInputDTO {
   token: string;
   productId: string;
-  quantity: number
+  quantity: number;
 }
 
 export interface IAddOrderInputDB {
@@ -45,9 +45,50 @@ export interface IDeleteOrderInputDTO {
 }
 
 export interface IOrdersOutputDB {
-  id: string,
-  product_id: string,
-  name: string,
-  price: number,
-  product_qty: number
+  id: string;
+  product_id: string;
+  name: string;
+  price: number;
+  product_qty: number;
+}
+
+export interface IGetOrderByIdOutputDB {
+  id: string;
+  user_id: string;
+  product_id: number;
+  product_qty: number;
+}
+
+export interface IGetQtyStockInputDTO {
+  productId: string;
+}
+
+export interface IGetQtyStockOutputDB {
+  qty_stock: number;
+}
+
+export interface IAlterOrderQtyIntputDTO {
+  incremento: number;
+  productId: string;
+  userId: string;
+}
+
+export interface ISelectOrdersInputDTO {
+  userId: string;
+}
+
+export interface IDeleteInputDTO {
+  orderId: string
+}
+
+export interface IGetOrderByProductIdInputDTO {
+  productId: string;
+  userId: string;
+}
+
+export interface IGetOrderByProductIdOutputDB {
+  id: string;
+  user_id: string;
+  product_id: number;
+  product_qty: number;
 }

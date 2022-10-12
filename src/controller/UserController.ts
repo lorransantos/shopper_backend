@@ -17,8 +17,10 @@ export class UserController {
       const response = await this.userBusiness.signup(input);
 
       res.status(201).send(response);
-    } catch (error: any) {
-      res.status(400).send(error.sqlMessage || { message: error.message });
+    } catch (error) {
+      res
+        .status(error.code)
+        .send(error.sqlMessage || { message: error.message });
     }
   };
 
@@ -30,12 +32,14 @@ export class UserController {
         email,
         password,
       };
-      
+
       const response = await this.userBusiness.login(input);
 
       res.status(201).send(response);
-    } catch (error: any) {
-      res.status(400).send(error.sqlMessage || { message: error.message });
+    } catch (error) {
+      res
+        .status(error.code)
+        .send(error.sqlMessage || { message: error.message });
     }
   };
 }

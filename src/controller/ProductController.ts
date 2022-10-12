@@ -11,7 +11,7 @@ export class ProductController {
       const response = await this.productBusiness.getProducts(token);
 
       res.status(200).send(response);
-    } catch (error: any) {
+    } catch (error) {
       res.status(400).send(error.sqlMessage || { message: error.message });
     }
   };

@@ -1,4 +1,5 @@
 import { UserDataBase } from '../database/UserDataBase';
+import { CustomError } from '../error/CustomError';
 import { ILoginInput, ISignupInput, User } from '../models/User';
 import { Authenticator, ITokenPayload } from '../services/Authenticator';
 import { HashManager } from '../services/HashManager';
@@ -17,23 +18,27 @@ export class UserBusiness {
     const password = input.password;
 
     if (!name || !email || !password) {
-      throw new Error('Favor preecher os campos');
+      throw new CustomError(400, 'Favor preencher os campos');
     }
 
     if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
-      throw new Error('Favor informar um email válido');
+      throw new CustomError(400, 'Favor informar um email válido');
     }
 
     if (password.length < 6) {
-      throw new Error('A senha precisa ter no mínimo 6 caracteres');
+      throw new CustomError(400, 'A senha precisa ter no mínimo 6 caracteres');
+    }
+
+    if (typeof email !== 'string') {
+      throw new CustomError(400, 'Tipo do campo "senha" incorreto');
     }
 
     if (typeof password !== 'string') {
-      throw new Error('Tipo do campo "senha" incorreto');
+      throw new CustomError(400, 'Tipo do campo "senha" incorreto');
     }
 
     if (typeof name !== 'string') {
-      throw new Error('Tipo do campo "name" incorreto');
+      throw new CustomError(400, 'Tipo do campo "name" incorreto');
     }
 
     const id: string = this.idGenerator.generate();
@@ -53,24 +58,24 @@ export class UserBusiness {
     const password = input.password;
 
     if (!email || !password) {
-      throw new Error('Favor preecher os campos');
+      throw new CustomError(400, 'Favor preecher os campos');
     }
 
     if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
-      throw new Error('Favor informar um email válido');
+      throw new CustomError(400, 'Favor informar um email válido');
     }
 
     if (password.length < 6) {
-      throw new Error('A senha precisa ter no mínimo 6 caracteres');
+      throw new CustomError(400, 'A senha precisa ter no mínimo 6 caracteres');
     }
 
     if (typeof password !== 'string') {
-      throw new Error('Tipo do campo "senha" incorreto');
+      throw new CustomError(400, 'Tipo do campo "senha" incorreto');
     }
 
     const userDB = await this.userDataBase.checkEmail(email);
     if (!userDB) {
-      throw new Error('Email não cadastrado');
+      throw new CustomError(404, 'Email não cadastrado');
     }
 
     const checkPassword = await this.hashManager.compare(
@@ -78,11 +83,11 @@ export class UserBusiness {
       userDB.password
     );
     if (!checkPassword) {
-      throw new Error('Senha incorreta');
+      throw new CustomError(403, 'Senha incorreta');
     }
 
     const payload: ITokenPayload = {
-      id: userDB.id
+      id: userDB.id,
     };
 
     const token: string = this.authenticator.generate(payload);
