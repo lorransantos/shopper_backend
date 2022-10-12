@@ -14,8 +14,8 @@ export class DeliveryDataBase extends BaseDatabase {
     const userId = input.userId;
     await BaseDatabase.connection(DeliveryDataBase.TABLE_FINISH_ORDER).insert({
       id,
-      reciveUserName: receiveUserName,
-      deliveryDate: deliveryDate,
+      receive_user_name: receiveUserName,
+      delivery_date: deliveryDate,
       user_id: userId,
     });
 

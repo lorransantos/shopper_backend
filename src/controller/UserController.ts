@@ -6,13 +6,12 @@ export class UserController {
   constructor(private userBusiness: UserBusiness) {}
   public signup = async (req: Request, res: Response) => {
     try {
-      const { name, email, password, role } = req.body;
+      const { name, email, password } = req.body;
 
       const input: ISignupInput = {
         name,
         email,
         password,
-        role,
       };
 
       const response = await this.userBusiness.signup(input);

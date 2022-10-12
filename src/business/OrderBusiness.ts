@@ -86,27 +86,27 @@ export class OrderBusiness {
     return 'Item deletado com sucesso!';
   };
 
-  public finishOrder = async (
-    reciveUserName: string,
-    deliveryDate: string,
-    token: string
-  ) => {
-    const userId = this.authenticator.getTokenPayload(token).id;
-    const purchaseList = await this.orderDataBase.selectOrders(userId);
+  // public finishOrder = async (
+  //   reciveUserName: string,
+  //   deliveryDate: string,
+  //   token: string
+  // ) => {
+  //   const userId = this.authenticator.getTokenPayload(token).id;
+  //   const purchaseList = await this.orderDataBase.selectOrders(userId);
 
-    const purchases = purchaseList.map((item) => item);
+  //   const purchases = purchaseList.map((item) => item);
 
-    const id: string = this.idGenerator.generate();
+  //   const id: string = this.idGenerator.generate();
 
-    const orderDelivery = await this.orderDataBase.finishOrder(
-      id,
-      reciveUserName,
-      deliveryDate
-    );
+  //   const orderDelivery = await this.orderDataBase.finishOrder(
+  //     id,
+  //     reciveUserName,
+  //     deliveryDate
+  //   );
 
-    return {
-      deliveryInfo: orderDelivery,
-      orders: purchases,
-    };
-  };
+  //   return {
+  //     deliveryInfo: orderDelivery,
+  //     orders: purchases,
+  //   };
+  // };
 }

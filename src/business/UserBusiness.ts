@@ -1,5 +1,5 @@
 import { UserDataBase } from '../database/UserDataBase';
-import { ILoginInput, ISignupInput, User, USER_ROLE } from '../models/User';
+import { ILoginInput, ISignupInput, User } from '../models/User';
 import { Authenticator, ITokenPayload } from '../services/Authenticator';
 import { HashManager } from '../services/HashManager';
 import { IdGenerator } from '../services/IdGenerator';
@@ -15,9 +15,8 @@ export class UserBusiness {
     const name = input.name;
     const email = input.email;
     const password = input.password;
-    const role = input.role;
 
-    if (!name || !email || !password || !role) {
+    if (!name || !email || !password) {
       throw new Error('Favor preecher os campos');
     }
 
@@ -40,7 +39,7 @@ export class UserBusiness {
     const id: string = this.idGenerator.generate();
     const hashPassword = await this.hashManager.hash(password);
 
-    const userDB = new User(id, name, email, hashPassword, role);
+    const userDB = new User(id, name, email, hashPassword);
 
     await this.userDataBase.createUser(userDB);
 
@@ -83,8 +82,7 @@ export class UserBusiness {
     }
 
     const payload: ITokenPayload = {
-      id: userDB.id,
-      role: userDB.role,
+      id: userDB.id
     };
 
     const token: string = this.authenticator.generate(payload);
