@@ -4,6 +4,7 @@ import { OrderDataBase } from '../database/OrderDataBase';
 import {
   IDeliveryInputDB,
   IDeliveryInputDTO,
+  IFinalizationOutputDTO,
   IGetDeliveryOrdersDTO,
   IGetDeliveryOrdersOutputDB,
 } from '../models/Delivery';
@@ -22,7 +23,9 @@ export class DeliveryBusiness {
     public authenticator: Authenticator
   ) {}
 
-  public deliveryOrder = async (input: IDeliveryInputDTO) => {
+  public deliveryOrder = async (
+    input: IDeliveryInputDTO
+  ): Promise<IFinalizationOutputDTO> => {
     const token = input.token;
     const receiveUserName = input.receiveUserName;
     const deliveryDate = input.deliveryDate;

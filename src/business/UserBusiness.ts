@@ -41,6 +41,11 @@ export class UserBusiness {
       throw new CustomError(400, 'Tipo do campo "name" incorreto');
     }
 
+    const checkEmail = await this.userDataBase.checkEmail(email);
+    if (checkEmail) {
+      throw new CustomError(409, 'Email já cadastrado');
+    }
+
     const id: string = this.idGenerator.generate();
     const hashPassword = await this.hashManager.hash(password);
 

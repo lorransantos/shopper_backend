@@ -1,6 +1,7 @@
 import { ProductDataBase } from './ProductDataBase';
 import {
   IDeliveryInputDB,
+  IFinalizationOrderOutputDB,
   IGetDeliveryOrdersDTO,
   IGetDeliveryOrdersOutputDB,
 } from '../models/Delivery';
@@ -9,7 +10,9 @@ import { BaseDatabase } from './BaseDataBase';
 export class DeliveryDataBase extends BaseDatabase {
   public static TABLE_FINISH_ORDER = 'orders_delivery';
 
-  public finalizationOrder = async (input: IDeliveryInputDB) => {
+  public finalizationOrder = async (
+    input: IDeliveryInputDB
+  ): Promise<IFinalizationOrderOutputDB[]> => {
     const receiveUserName = input.receiveUserName;
     const deliveryDate = input.deliveryDate;
     const id = input.id;
@@ -40,7 +43,10 @@ export class DeliveryDataBase extends BaseDatabase {
     return response;
   };
 
-  public updateStock = async (productId: string, qtyPurchase: number) => {
+  public updateStock = async (
+    productId: string,
+    qtyPurchase: number
+  ): Promise<void> => {
     await BaseDatabase.connection(ProductDataBase.TABLE_PRODUCTS)
       .update({ qty_stock: qtyPurchase })
       .where({ id: productId });

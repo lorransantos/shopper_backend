@@ -1,3 +1,5 @@
+import { IOrdersOutputDB } from './Order';
+
 export class Delivery {
   constructor(
     private id: string,
@@ -40,4 +42,16 @@ export interface IGetDeliveryOrdersOutputDB {
   user_id: string;
   receive_user_name: string;
   delivery_date: string;
+}
+
+export interface IFinalizationOrderOutputDB {
+  id: string;
+  user_id: string;
+  receive_user_name: string;
+  delivery_date: string;
+}
+
+export interface IFinalizationOutputDTO {
+  deliveryInfo: IFinalizationOrderOutputDB[];
+  orders: IOrdersOutputDB[];
 }

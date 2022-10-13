@@ -50,7 +50,7 @@ Content-Type: application/json
 
 ### ADD DELIVERY DATE
 POST http://localhost:3003/delivery/add-delivery
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MjM1NWI5LTBmYmQtNGRlNi04Zjc0LTYzNDFhZThiZWIwMCIsImlhdCI6MTY2NTUyODAwNSwiZXhwIjoxNjY1NjE0NDA1fQ.fWXhHQDN-KiZDborUfv19MdiRxVk-bfUPrMUKbvSrTA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MjM1NWI5LTBmYmQtNGRlNi04Zjc0LTYzNDFhZThiZWIwMCIsImlhdCI6MTY2NTYyNjQyMiwiZXhwIjoxNjY1NzEyODIyfQ.SnWFUClh5Qsfc1QzHplsXSHNGEkCRJlD7wNDeS5aNec
 Content-Type: application/json
 
 {
@@ -62,4 +62,4 @@ Content-Type: application/json
 ### GET DELIVERY DATE
 
 GET http://localhost:3003/delivery
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MjM1NWI5LTBmYmQtNGRlNi04Zjc0LTYzNDFhZThiZWIwMCIsImlhdCI6MTY2NTUyODAwNSwiZXhwIjoxNjY1NjE0NDA1fQ.fWXhHQDN-KiZDborUfv19MdiRxVk-bfUPrMUKbvSrTA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MjM1NWI5LTBmYmQtNGRlNi04Zjc0LTYzNDFhZThiZWIwMCIsImlhdCI6MTY2NTYyNjQyMiwiZXhwIjoxNjY1NzEyODIyfQ.SnWFUClh5Qsfc1QzHplsXSHNGEkCRJlD7wNDeS5aNec

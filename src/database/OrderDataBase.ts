@@ -104,22 +104,4 @@ export class OrderDataBase extends BaseDatabase {
       .delete()
       .where({ id: orderId });
   };
-
-  // public finishOrder = async (
-  //   id: string,
-  //   reciveUserName: string,
-  //   deliveryDate: string
-  // ) => {
-  //   await BaseDatabase.connection(OrderDataBase.TABLE_FINISH_ORDER).insert({
-  //     id,
-  //     reciveUserName: reciveUserName,
-  //     deliveryDate: deliveryDate,
-  //   });
-
-  //   const response = await BaseDatabase.connection(
-  //     OrderDataBase.TABLE_FINISH_ORDER
-  //   );
-
-  //   return response;
-  // };
 }
