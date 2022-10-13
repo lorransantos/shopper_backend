@@ -1,15 +1,9 @@
-export enum USER_ROLE {
-  ADMIN = 'ADMIN',
-  NORMAL = 'NORMAL',
-}
-
 export class User {
   constructor(
     private id: string,
     private name: string,
     private email: string,
     private password: string,
-    private role: USER_ROLE
   ) {}
 
   public getId = () => {
@@ -27,17 +21,12 @@ export class User {
   public getPassword = () => {
     return this.password;
   };
-
-  public getRole = () => {
-    return this.role;
-  };
 }
 
 export interface ISignupInput {
   name: string;
   email: string;
   password: string;
-  role: USER_ROLE;
 }
 
 export interface ILoginInput {
@@ -50,5 +39,4 @@ export interface IUserDB {
   name: string;
   email: string;
   password: string;
-  role: USER_ROLE;
 }

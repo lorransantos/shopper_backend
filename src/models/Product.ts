@@ -23,9 +23,13 @@ export class Product {
   };
 }
 
-export interface IGetProductByIdOutput {
-  id: string,
-  name: string,
-  price: number,
-  qty_stock: number
+export interface IGetProductByIdInputDTO {
+  productId: string;
 }
+export interface IGetProductByIdOutput {
+  id: string;
+  name: string;
+  price: number;
+  qty_stock: number;
+}
+

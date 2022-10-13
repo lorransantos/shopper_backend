@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es2021",
+    "target": "es6",
     "module": "commonjs",
     "sourceMap": true,
     "outDir": "./build",
-    "rootDir": "./",
+    "rootDir": "./src",
     "removeComments": true,
-    "noImplicitAny": true,
+    "strict": false,
     "esModuleInterop": true,
-    "strict": true
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true
   }
-  // "exclude": ["./tests/*"]
 }

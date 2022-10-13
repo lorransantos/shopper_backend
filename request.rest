@@ -8,10 +8,9 @@ POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
-  "name": "Vegeta",
-  "email": "vegeta@gmail.com",
-  "password": "123456",
-  "role": "ADMIN"
+  "name": "Gohan",
+  "email": "gohangmail.com",
+  "password": "123456"
 }
 
 ### LOGIN
@@ -19,13 +18,13 @@ POST http://localhost:3003/user/login
 Content-Type: application/json
 
 {
-  "email": "vegeta@gmail.com",
+  "email": "gohan@gmail.com",
   "password": "123456"
 }
 
 ### ADD ORDER
 POST http://localhost:3003/order/add-order
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiZGYxN2M4LWI3NTctNDM5MC05ODk4LWFlOTY0YmI0YTUwNCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NTM0NTI2MCwiZXhwIjoxNjY1NDMxNjYwfQ.1jGxP2QFCCy0jBhuXDApp5vzjSHWL45asHIAvRLqutA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MjM1NWI5LTBmYmQtNGRlNi04Zjc0LTYzNDFhZThiZWIwMCIsImlhdCI6MTY2NTUyODAwNSwiZXhwIjoxNjY1NjE0NDA1fQ.fWXhHQDN-KiZDborUfv19MdiRxVk-bfUPrMUKbvSrTA
 Content-Type: application/json
 
 {
@@ -36,31 +35,31 @@ Content-Type: application/json
 
 ### GET ORDER
 GET http://localhost:3003/order
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzMGY1MjdhLWY5OTItNDBkZS05ZDc4LTMxNzRlZTFiZWFhOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjU0NDE3MjIsImV4cCI6MTY2NTUyODEyMn0.ENGZHB2ZodQdSsOoeO54ey2DgdS3lzKLI9P4qD66fkE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MjM1NWI5LTBmYmQtNGRlNi04Zjc0LTYzNDFhZThiZWIwMCIsImlhdCI6MTY2NTU5MjM5MCwiZXhwIjoxNjY1Njc4NzkwfQ.5NNmjXvksm8VLV_1QIGnattQVRwMiIaNvvxUmmlYuCs
 
 
 ### DELETE ORDER
 PUT http://localhost:3003/order/delete-order
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiZGYxN2M4LWI3NTctNDM5MC05ODk4LWFlOTY0YmI0YTUwNCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NTM0NTI2MCwiZXhwIjoxNjY1NDMxNjYwfQ.1jGxP2QFCCy0jBhuXDApp5vzjSHWL45asHIAvRLqutA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MjM1NWI5LTBmYmQtNGRlNi04Zjc0LTYzNDFhZThiZWIwMCIsImlhdCI6MTY2NTU5MjM5MCwiZXhwIjoxNjY1Njc4NzkwfQ.5NNmjXvksm8VLV_1QIGnattQVRwMiIaNvvxUmmlYuCs
 Content-Type: application/json
 
 {
-  "orderId": "964906df-30d9-4835-9b95-e34645d33c93"
+  "orderId": "45ec76d3-2aa8-41a9-9127-e4e2da652ecf"
 }
 
 
 ### ADD DELIVERY DATE
 POST http://localhost:3003/delivery/add-delivery
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzMGY1MjdhLWY5OTItNDBkZS05ZDc4LTMxNzRlZTFiZWFhOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjU0NDE3MjIsImV4cCI6MTY2NTUyODEyMn0.ENGZHB2ZodQdSsOoeO54ey2DgdS3lzKLI9P4qD66fkE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MjM1NWI5LTBmYmQtNGRlNi04Zjc0LTYzNDFhZThiZWIwMCIsImlhdCI6MTY2NTUyODAwNSwiZXhwIjoxNjY1NjE0NDA1fQ.fWXhHQDN-KiZDborUfv19MdiRxVk-bfUPrMUKbvSrTA
 Content-Type: application/json
 
 {
    "receiveUserName": "Goku",
-   "deliveryDate": "22/12/2022"
+   "deliveryDate": "2022-11-22"
 }
 
 
 ### GET DELIVERY DATE
 
 GET http://localhost:3003/delivery
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiZGYxN2M4LWI3NTctNDM5MC05ODk4LWFlOTY0YmI0YTUwNCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NTM0NTI2MCwiZXhwIjoxNjY1NDMxNjYwfQ.1jGxP2QFCCy0jBhuXDApp5vzjSHWL45asHIAvRLqutA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MjM1NWI5LTBmYmQtNGRlNi04Zjc0LTYzNDFhZThiZWIwMCIsImlhdCI6MTY2NTUyODAwNSwiZXhwIjoxNjY1NjE0NDA1fQ.fWXhHQDN-KiZDborUfv19MdiRxVk-bfUPrMUKbvSrTA

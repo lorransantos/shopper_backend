@@ -13,26 +13,27 @@ export class OrderController {
     try {
       const token: string = req.headers.authorization as string;
       const productId: string = req.body.productId as string;
-      const quantity: number = req.body.quantity as number
+      const quantity: number = req.body.quantity as number;
 
       const input: IAddOrderInputDTO = {
         token,
         productId,
-        quantity
+        quantity,
       };
 
       const response = await this.orderBusiness.addOrder(input);
 
-      res.status(200).send(response);
-    } catch (error: any) {
-      res.status(400).send(error.sqlMessage || { message: error.message });
+      res.status(201).send(response);
+    } catch (error) {
+      res
+        .status(error.code)
+        .send(error.sqlMessage || { message: error.message });
     }
   };
 
   public getOrders = async (req: Request, res: Response) => {
     try {
       const token: string = req.headers.authorization as string;
-      // const productId: string = req.body.productId as string;
 
       const input: IGetOrderInputDTO = {
         token,
@@ -41,8 +42,10 @@ export class OrderController {
       const response = await this.orderBusiness.getOrders(input);
 
       res.status(200).send(response);
-    } catch (error: any) {
-      res.status(400).send(error.sqlMessage || { message: error.message });
+    } catch (error) {
+      res
+        .status(error.code)
+        .send(error.sqlMessage || { message: error.message });
     }
   };
 
@@ -59,25 +62,10 @@ export class OrderController {
       const response = await this.orderBusiness.deleteOrder(input);
 
       res.status(200).send(response);
-    } catch (error: any) {
-      res.status(400).send(error.sqlMessage || { message: error.message });
-    }
-  };
-
-  public finishOrder = async (req: Request, res: Response) => {
-    try {
-      const token: string = req.headers.authorization as string;
-      const { reciveUserName, deliveryDate } = req.body;
-
-      const result = await this.orderBusiness.finishOrder(
-        reciveUserName,
-        deliveryDate,
-        token
-      );
-
-      res.status(201).send(result);
-    } catch (error: any) {
-      res.status(400).send(error.sqlMessage || { message: error.message });
+    } catch (error) {
+      res
+        .status(error.code)
+        .send(error.sqlMessage || { message: error.message });
     }
   };
 }

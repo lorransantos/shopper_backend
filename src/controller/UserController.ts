@@ -6,20 +6,21 @@ export class UserController {
   constructor(private userBusiness: UserBusiness) {}
   public signup = async (req: Request, res: Response) => {
     try {
-      const { name, email, password, role } = req.body;
+      const { name, email, password } = req.body;
 
       const input: ISignupInput = {
         name,
         email,
         password,
-        role,
       };
 
       const response = await this.userBusiness.signup(input);
 
       res.status(201).send(response);
-    } catch (error: any) {
-      res.status(400).send(error.sqlMessage || { message: error.message });
+    } catch (error) {
+      res
+        .status(error.code)
+        .send(error.sqlMessage || { message: error.message });
     }
   };
 
@@ -31,12 +32,14 @@ export class UserController {
         email,
         password,
       };
-      
+
       const response = await this.userBusiness.login(input);
 
       res.status(201).send(response);
-    } catch (error: any) {
-      res.status(400).send(error.sqlMessage || { message: error.message });
+    } catch (error) {
+      res
+        .status(error.code)
+        .send(error.sqlMessage || { message: error.message });
     }
   };
 }
